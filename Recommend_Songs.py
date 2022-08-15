@@ -24,14 +24,13 @@ add_bg_from_local('bg-5.jpg')
 st.title("Welcome to Song Recommendation by Emotion Detection")
 picture=st.camera_input('Capture Face for Recognition')
 if picture is not None:
+    st.image(picture)
     img=Image.open(picture)
     picture=np.array(img)
     m=RMN()
     results = m.detect_emotion_for_single_frame(picture)
     prediction=results[0]['emo_label']
     image=m.draw(picture,results)
-    cv2.imwrite('output.jpg',image)
-    st.image('output.jpg')
     st.write("Emotion detected is: ",prediction)
     dict1={'angry':'https://open.spotify.com/playlist/71Xpaq3Hbpxz6w9yDmIsaH',
            'disgust':'https://open.spotify.com/playlist/3qgzMg4m5tvf16PzlPgGa9',
